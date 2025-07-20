@@ -28,14 +28,14 @@ defined('MOODLE_INTERNAL') || die();
 if ($hassiteconfig) {
     $settings = new admin_settingpage('local_appcrueservices', get_string('pluginname', 'local_appcrueservices'));
 
-    // Mostrar descripción del plugin.
+    // Show plugin description.
     $settings->add(new admin_setting_heading(
         'local_appcrueservices/desc',
         '',
         get_string('desc', 'local_appcrueservices')
     ));
     
-    // Configuración del token.
+    // Token configuration.
     $settings->add(new admin_setting_configtext(
         'local_appcrueservices/wstoken',
         get_string('wstoken', 'local_appcrueservices'),
@@ -44,15 +44,15 @@ if ($hassiteconfig) {
         PARAM_ALPHANUMEXT
     ));
     
-    // Configuración de API key.
+    // API key configuration.
     $settings->add(new admin_setting_configpasswordunmask(
-        'local_appcrueservices/apikey', // Nombre de la configuración (se guarda en mdl_config).
-        get_string('apikey', 'local_appcrueservices'), // Nombre visible en el panel de administración.
-        get_string('apikey_desc', 'local_appcrueservices'), // Descripción (opcional).
-        '', // Valor por defecto (vacío).
-        PARAM_RAW // Tipo de parámetro (permite caracteres especiales).
+        'local_appcrueservices/apikey', // Configuration name (stored in mdl_config).
+        get_string('apikey', 'local_appcrueservices'), // Display name in the admin panel.
+        get_string('apikey_desc', 'local_appcrueservices'), // Description (optional).
+        '', // Default value (empty).
+        PARAM_RAW // Parameter type (allows special characters).
     ));
     
-    // Añadir la página de configuración al menú Plugins locales.
+    // Add the settings page to the Local Plugins menu.
     $ADMIN->add('localplugins', $settings);
 }

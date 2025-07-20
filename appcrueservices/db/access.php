@@ -15,7 +15,6 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Returns a WS token for a given user, always regenerating a new one.
  *
  * @package   local_appcrueservices
  * @author    Alberto Otero Mato

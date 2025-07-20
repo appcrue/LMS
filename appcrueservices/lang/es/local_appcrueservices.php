@@ -15,7 +15,6 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Returns a WS token for a given user, always regenerating a new one.
  *
  * @package   local_appcrueservices
  * @author    Alberto Otero Mato
@@ -41,9 +40,16 @@ $string['apikey_desc'] = 'Clave secreta utilizada para autenticar servicios exte
 $string['invalidapikey'] = 'API Key no válida';
 $string['missingwstoken'] = 'No se ha configurado el token del servicio web.';
 $string['jsondecodeerror'] = 'Error al interpretar la respuesta JSON del servidor: {$a}.';
-$string['usernotenrolled'] = 'El usuario no está matriculado en el curso.';
+$string['usernotenrolled'] = 'El usuario no está matriculado en ningún curso.';
+$string['missingparam'] = 'Falta el parámetro requerido "{$a}"';
+$string['invalidtimerange'] = 'Rango de tiempo no válido: la fecha de inicio debe ser anterior a la de fin';
+$string['internalerror'] = 'Error interno del servidor';
+$string['wserror'] = 'Error en el servicio web';
+$string['invalidparameter'] = 'Valor de parámetro no válido';
+$string['selfimpersonation'] = 'No se puede suplantar a uno mismo';
 
 // Descripciones de funciones del servicio.
 $string['service:get_grades'] = 'Obtener calificaciones del estudiante mediante suplantación segura.';
 $string['service:get_forums'] = 'Obtener los foros visibles, discusiones y respuestas para un estudiante autenticado.';
 $string['service:get_calendar'] = 'Recupera los eventos del calendario de un estudiante identificado por su email.';
+$string['success:request_processed'] = 'Solicitud procesada con éxito';

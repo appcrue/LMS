@@ -15,7 +15,6 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Returns a WS token for a given user, always regenerating a new one.
  *
  * @package   local_appcrueservices
  * @author    Alberto Otero Mato
@@ -42,8 +41,15 @@ $string['invalidapikey'] = 'Invalid API Key';
 $string['missingwstoken'] = 'The web service token has not been configured.';
 $string['jsondecodeerror'] = 'Error interpreting JSON response from server: {$a}.';
 $string['usernotenrolled'] = 'The user is not enrolled in any course.';
+$string['missingparam'] = 'Required parameter "{$a}" is missing';
+$string['invalidtimerange'] = 'Invalid time range: start time must be before end time';
+$string['internalerror'] = 'Internal server error';
+$string['wserror'] = 'Web service error';
+$string['invalidparameter'] = 'Invalid parameter value';
+$string['selfimpersonation'] = 'Cannot impersonate self';
 
 // Service function descriptions.
 $string['service:get_grades'] = 'Retrieve final course grades for a student by email.';
 $string['service:get_forums'] = 'Retrieve visible forums, discussions, and replies for an authenticated student.';
 $string['service:get_calendar'] = 'Retrieve calendar events for a student identified by email.';
+$string['success:request_processed'] = 'Request processed successfully';

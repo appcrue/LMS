@@ -15,7 +15,6 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Returns a WS token for a given user, always regenerating a new one.
  *
  * @package   local_appcrueservices
  * @author    Alberto Otero Mato
@@ -27,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component  = 'local_appcrueservices';
 $plugin->version    = 2025070400;
-$plugin->requires   = 2019052000; // Moodle 3.7 o superior.
+$plugin->requires   = 2019052000; // Moodle 3.7 or higher
 $plugin->maturity   = MATURITY_STABLE;
 $plugin->release    = 'v0.3.0';
 $plugin->autoloader = true;

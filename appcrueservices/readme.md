@@ -1,214 +1,214 @@
+# Plugin local_appcrueservices
 
-Plugin local_webtoken
-=====================
+## Description
+--------------
+This Moodle plugin exposes the following functionalities:
 
-Descripción
------------
-Este plugin para Moodle expone las siguientes funcionalidades:
+1. **Student Grades**  
+   Web service `local_appcrueservices_get_grades` that returns the complete list of a student’s grades based on the applied restrictions.
 
-1. **Notas del alumno**  
-  Servicio web `local_appcrueservices_get_grades` que devuelve la lista completa de notas de un alumno en función de las restricciones que tenga aplicadas.
+2. **Student Calendar**  
+   Web service `local_appcrueservices_get_calendar` that returns the complete list of a student’s calendar events based on the applied restrictions.
 
-2. **Calendario del alumno**  
-  Servicio web `local_appcrueservices_get_calendar` que devuelve la lista completa de los eventos de calendario de un alumno en función de las restricciones que tenga aplicadas.
+3. **Student Forums**  
+   Web service `local_appcrueservices_get_forums` that returns the visible forums in the courses where the student is enrolled, along with discussions and posted messages.
 
-3. **Foros del alumno**  
-   Servicio web `local_appcrueservices_get_forums` que devuelve los foros visibles en los cursos en los que está inscrito el estudiante, junto con las discusiones y mensajes publicados.
+## Installation
+---------------
+**Requirements:** Moodle 3.7 or higher
+1. Copy the `appcrueservices/` folder into your Moodle installation (inside `moodle/local/`).
+2. Go to `Site administration > Notifications` so Moodle can install and register the plugin.
+3. Configure the API Key:
+   - Go to `Site administration > Plugins > Local plugins > Appcrueservices`.
+   - Enter your API Key in the corresponding field and save changes.
+4. Web service configuration:
+   - Go to `Site administration > Plugins > Web services > External services`.
+   - Ensure that the service with shortname `appcrueservices_service` exists (or the name you defined).
+   - Make sure the function `local_appcrueservices_get_grades` is enabled.
+5. Permissions:
+   - Assign the capability `local/appcrueservices:use` to the `manager` role (or another role) via `Site administration > Users > Permissions > Define roles`.
 
-Instalación
------------
-1. Copie la carpeta `appcrueservices/` a su instalación de Moodle (dentro de `moodle/local/`).
-2. Acceda a la sección `Administración del sitio > Notificaciones` para que Moodle instale y registre el plugin.
-3. Configure la API Key:
-  - Vaya a `Administración del sitio > Plugins > Plugins locales > Appcrueservices`.
-  - Ingrese su API Key en el campo correspondiente y guarde los cambios
-4. Configuración de servicios web:
-  - Vaya a `Administración del sitio > Plugins > Servicios web > Servicios externos`.
-  - Verifique que existe el servicio con shortname `appcrueservices_service` (o el nombre que haya definido).
-  - Asegúrese de que la función `local_appcrueservices_get_grades` esté habilitada.
-5. Permisos:
-  - Asigne la capability `local/appcrueservices:use` al rol `manager` (u otro rol) vía `Administración del sitio > Usuarios > Permisos > Definir roles`.
-
-Uso
----
-1. **Obtener notas del alumno**
-  Llama al servicio REST de Moodle con el token del usuario genérico que tenga permiso de WS, el email del estudiante y la API Key:
+## Usage
+--------
+### 1. **Get student grades**
+Call the Moodle REST service using the token of a generic user with WS permission, the student's email, and the API Key:
 
   ```
-  GET https://TU_MOODLE_DOMAIN/local/appcrueservices/grades_proxy.php?
+  GET https://YOUR_MOODLE_DOMAIN/local/appcrueservices/grades_proxy.php?
     studentemail=EMAIL_ESTUDIANTE
-    &apikey=TU_API_KEY
+    &apikey=YOUR_API_KEY
     &moodlewsrestformat=json
   ```
 
-  **Parámetros:**
-  - studentemail: Email del alumno a obtener sus notas (requerido)
-  - apikey: API Key configurada en el plugin (requerido)
-  - moodlewsrestformat: Formato de respuesta (json recomendado)
+  **Parameters:**
+  - `studentemail`: Email of the student whose grades are to be retrieved (required)
+  - `apikey`: API Key configured in the plugin (required)
+  - `moodlewsrestformat`: Response format (json recommended)
 
-  **Respuesta exitosa (JSON):**
-    ```json
-    [
-      {
-        "courseid": 3,
-        "coursename": "2024 - Analisis de datos",
-        "itemname": "Total del curso",
-        "finalgrade": 11.20002,
-        "gradeformatted": "11,20"
-      },
-      {
-        "courseid": 3,
-        "coursename": "2024 - Analisis de datos",
-        "itemname": "Examen 1 - Aula 1",
-        "finalgrade": 5.2885999999999997,
-        "gradeformatted": "5,29"
-      },
-      ...
-    ]
+  **Successful response (JSON):**
+  ```json
+  [
+    {
+      "courseid": 3,
+      "coursename": "2024 - Data Analysis",
+      "itemname": "Course Total",
+      "finalgrade": 11.20002,
+      "gradeformatted": "11.20"
+    },
+    {
+      "courseid": 3,
+      "coursename": "2024 - Data Analysis",
+      "itemname": "Exam 1 - Room 1",
+      "finalgrade": 5.2885999999999997,
+      "gradeformatted": "5.29"
+    },
+    ...
+  ]
     ```
 
-  **Notas**
-  - Los parámetros `timestart` y `timeend` son opcionales, si no se proporcionan, se toma por defecto el rango desde ahora hasta 30 días después.
+  **Notes**
+  - The parameters `timestart` and `timeend` are optional. If not provided, the default range is from now to 30 days ahead.
 
-2. **Obtener calendario del alumno**
-  Llama al servicio REST de Moodle con el token del usuario genérico que tenga permiso de WS, el email del estudiante y la API Key. Parámetros opcionales son timestart y timeend los cuales si no se ponen se recuperará los próximos 30 días desde la fecha actual.
+2. **Get student calendar**
+  Call the Moodle REST service using the token of a generic user with WS permission, the student's email, and the API Key. Optional parameters are timestart and timeend. If omitted, the next 30 days from the current date will be returned.
 
   ```
-  GET https://TU_MOODLE_DOMAIN/local/appcrueservices/calendar_proxy.php?
+  GET https://YOUR_MOODLE_DOMAIN/local/appcrueservices/calendar_proxy.php?
     studentemail=EMAIL_ESTUDIANTE
-    &apikey=TU_API_KEY
+    &apikey=YOUR_API_KEY
     &moodlewsrestformat=json
     &timestart=1751788139
     &timeend=1752133800
   ```
 
-  **Parámetros:**
-  - studentemail: Email del alumno a obtener sus notas (requerido)
-  - apikey: API Key configurada (requerido)
-  - moodlewsrestformat: Formato de respuesta (json recomendado)
-  - timestart: Fecha inicio en formato epoch (opcional)
-  - timeend: Fecha fin en formato epoch (opcional)
+  **Parameters:**
+  - `studentemail`: Email of the student whose grades are to be retrieved (required)
+  - `apikey`: API Key configured in the plugin (required)
+  - `moodlewsrestformat`: Response format (json recommended)
+  - `timestart`: Start date in epoch format (optional)
+  - `timeend`: End date in epoch format (optional)
 
-  **Respuesta exitosa (JSON):**
+  **Successful response (JSON):**
     ```json
     {
       "userid": 50,
       "events": [
-          {
-              "id": 9,
-              "name": "Prueba 1 Calendario",
-              "description": "Prueba del plugin Calendario 1.1.00",
-              "timestart": 1751791380,
-              "timeduration": 82800,
-              "timemodified": 1751874233,
-              "courseid": 0,
-              "coursename": ""
-          },
-          {
-            "id": 10,
-            "name": "Prueba 2",
-            "description": "",
-            "timestart": 1751874240,
-            "timeduration": 0,
-            "timemodified": 1751874278,
-            "courseid": 0,
-            "coursename": ""
-        }
-    ]
-    }
-   ```
-
-  **Respuesta de error (JSON):**
-    ```json
-    {
-      "error": "Mensaje de error descriptivo"
-    }
-    ```
-
-3. **Obtener foros, discusiones y mensajes del alumno**
-  Llama al servicio REST de Moodle con el token del usuario genérico que tenga permiso de WS, el email del estudiante y la API Key:
-
-  ```
-  GET https:/TU_MOODLE_DOMAIN/local/appcrueservices/forums_proxy.php?
-    studentemail=EMAIL_ESTUDIANTE
-    &apikey=TU_API_KEY
-    &moodlewsrestformat=json
-  ```
-
-  **Parámetros:**
-  - studentemail: Email del alumno a obtener sus notas (requerido)
-  - apikey: API Key configurada en el plugin (requerido)
-  - moodlewsrestformat: Formato de respuesta (json recomendado)
-
-  **Respuesta exitosa (JSON):**
-    ```json
-  {
-    "forums": [
-    {
-      "course_title": "Introducción a la Programación",
-      "forum_name": "Foro de bienvenida",
-      "description": "Este foro es para presentarse y conocerse.",
-      "lock_at": "",
-      "todo_date": "",
-      "html_url": "",
-      "topic_title": "Presentaciones",
-      "posted_at": 1720000000,
-      "unread_count": "3",
-      "replies": [
         {
-          "id": "101",
-          "parent_id": "0",
-          "display_name": "Alberto Otero",
-          "createdAt": 1720000001,
-          "message": "Hola a todos, soy Alberto y me gusta programar.",
-          "replies": [
-            {
-              "id": "102",
-              "parent_id": "101",
-              "display_name": "Laura Gómez",
-              "createdAt": 1720000100,
-              "message": "¡Bienvenido Alberto! Yo también estoy empezando.",
-              "replies": [
-                {
-                  "id": "103",
-                  "parent_id": "102",
-                  "display_name": "Alberto Otero",
-                  "createdAt": 1720000200,
-                  "message": "Gracias Laura :)",
-                  "replies": []
-                }
-              ]
-            },
-            {
-              "id": "104",
-              "parent_id": "101",
-              "display_name": "Carlos Ruiz",
-              "createdAt": 1720000300,
-              "message": "¡Hola Alberto! Qué bueno tenerte aquí.",
-              "replies": []
-            }
-          ]
+          "id": 9,
+          "name": "Test 1 Calendar",
+          "description": "Plugin Calendar Test 1.1.00",
+          "timestart": 1751791380,
+          "timeduration": 82800,
+          "timemodified": 1751874233,
+          "courseid": 0,
+          "coursename": ""
+        },
+        {
+          "id": 10,
+          "name": "Test 2",
+          "description": "",
+          "timestart": 1751874240,
+          "timeduration": 0,
+          "timemodified": 1751874278,
+          "courseid": 0,
+          "coursename": ""
         }
       ]
     }
-  ]
    ```
 
-  **Respuesta de error (JSON):**
+  **Error response (JSON):**
     ```json
     {
-      "error": "Mensaje de error descriptivo"
+      "error": "Descriptive error message"
+    }
+    ```
+
+3. **Get student forums, discussions, and messages**
+  Call the Moodle REST service using the token of a generic user with WS permission, the student's email, and the API Key:
+
+  ```
+  GET https:/YOUR_MOODLE_DOMAIN/local/appcrueservices/forums_proxy.php?
+    studentemail=EMAIL_ESTUDIANTE
+    &apikey=YOUR_API_KEY
+    &moodlewsrestformat=json
+  ```
+
+  **Parameters:**
+  - `studentemail`: Email of the student whose grades are to be retrieved (required)
+  - `apikey`: API Key configured in the plugin (required)
+  - `moodlewsrestformat`: Response format (json recommended)
+
+  **Successful response (JSON):**
+    ```json
+  {
+    "forums": [
+      {
+        "course_title": "Introduction to Programming",
+        "forum_name": "Welcome Forum",
+        "description": "This forum is for introductions and getting to know each other.",
+        "lock_at": "",
+        "todo_date": "",
+        "html_url": "",
+        "topic_title": "Introductions",
+        "posted_at": 1720000000,
+        "unread_count": "3",
+        "replies": [
+          {
+            "id": "101",
+            "parent_id": "0",
+            "display_name": "Alberto Otero",
+            "createdAt": 1720000001,
+            "message": "Hi everyone, I'm Alberto and I like programming.",
+            "replies": [
+              {
+                "id": "102",
+                "parent_id": "101",
+                "display_name": "Laura Gómez",
+                "createdAt": 1720000100,
+                "message": "Welcome Alberto! I'm just getting started too.",
+                "replies": [
+                  {
+                    "id": "103",
+                    "parent_id": "102",
+                    "display_name": "Alberto Otero",
+                    "createdAt": 1720000200,
+                    "message": "Thanks Laura :)",
+                    "replies": []
+                  }
+                ]
+              },
+              {
+                "id": "104",
+                "parent_id": "101",
+                "display_name": "Carlos Ruiz",
+                "createdAt": 1720000300,
+                "message": "Hi Alberto! Great to have you here.",
+                "replies": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+   ```
+
+  **Error response (JSON):**
+    ```json
+    {
+      "error": "Descriptive error message"
     }
     ```
 
 
-Ejemplo con curl
-----------------
-# 1. Obtener notas del alumno
-curl "https://TU_MOODLE_DOMAIN/local/appcrueservices/grades_proxy.php?studentemail=EMAIL_ESTUDIANTE&apikey=TU_API_KEY"
+Example with curl
+-----------------
+# 1. Get student grades
+curl "https://YOUR_MOODLE_DOMAIN/local/appcrueservices/grades_proxy.php?studentemail=STUDENT_EMAIL&apikey=YOUR_API_KEY"
 
-# 2. Obtener calendarios del alumno
-curl "https://TU_MOODLE_DOMAIN/http:/local/appcrueservices/calendar_proxy.php?moodlewsrestformat=json&studentemail=EMAIL_ESTUDIANTE&apikey=TU_API_KEY&timestart=1751788139&timeend=0"
+# 2. Get student calendar
+curl "https://YOUR_MOODLE_DOMAIN/local/appcrueservices/calendar_proxy.php?moodlewsrestformat=json&studentemail=STUDENT_EMAIL&apikey=YOUR_API_KEY&timestart=1751788139&timeend=0"
 
-# 3. Obtener forums del alumno
-curl "https:/TU_MOODLE_DOMAIN/local/appcrueservices/forums_proxy.php?moodlewsrestformat=json&studentemail=EMAIL_ESTUDIANTE&apikey=TU_API_KEY"
+# 3. Get student forums
+curl "https://YOUR_MOODLE_DOMAIN/local/appcrueservices/forums_proxy.php?moodlewsrestformat=json&studentemail=STUDENT_EMAIL&apikey=YOUR_API_KEY"
