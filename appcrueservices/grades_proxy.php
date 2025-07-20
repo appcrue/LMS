@@ -33,19 +33,20 @@ try {
     $studentemail = required_param('studentemail', PARAM_EMAIL);
     $apikey = required_param('apikey', PARAM_RAW);
 
-    // Obtener clave almacenada para comparar
-    $storedapikey = get_config('local_appcrueservices', 'apikey');
-    if ($storedapikey !== $apikey) {
+    // 1. Obtener y validar API Key
+    $stored_apikey = get_config('local_appcrueservices', 'apikey');
+    if (empty($stored_apikey) || $apikey !== $stored_apikey) {
         throw new moodle_exception('invalidapikey', 'local_appcrueservices');
     }
 
-    // Obtener token de configuración del plugin
+    // 2. Obtener token de configuración del plugin
     $wstoken = get_config('local_appcrueservices', 'wstoken');
     if (empty($wstoken)) {
         throw new moodle_exception('missingwstoken', 'local_appcrueservices');
     }
 
-    $functionname = 'local_appcrueservices_get_user_grades';
+    // 3. Llamar al servicio web interno
+    $functionname = 'local_appcrueservices_external_grades_get_grades';
     $serverurl = $CFG->wwwroot . '/webservice/rest/server.php';
 
     $params = [

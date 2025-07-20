@@ -25,8 +25,9 @@
  
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component = 'local_appcrueservices';
-$plugin->version   = 2025070400;
-$plugin->requires  = 2019052000; // Moodle 3.7 o superior.
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = 'v0.0.3';
+$plugin->component  = 'local_appcrueservices';
+$plugin->version    = 2025070400;
+$plugin->requires   = 2019052000; // Moodle 3.7 o superior.
+$plugin->maturity   = MATURITY_STABLE;
+$plugin->release    = 'v0.3.0';
+$plugin->autoloader = true;

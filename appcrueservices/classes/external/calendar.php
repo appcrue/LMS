@@ -1,4 +1,8 @@
 <?php
+namespace local_appcrueservices\external;
+
+use core_text;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,24 +29,25 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/calendar/lib.php');
 
-class local_appcrueservices_calendar_external extends external_api {
+class calendar extends \external_api {
 
-    public static function get_user_calendar_parameters() {
-        return new external_function_parameters([
-            'studentemail' => new external_value(PARAM_EMAIL, 'Email del estudiante'),
-            'apikey' => new external_value(PARAM_RAW, 'API Key de autenticación'),
-            'timestart' => new external_value(PARAM_INT, 'Timestamp de inicio', VALUE_DEFAULT, 0),
-            'timeend' => new external_value(PARAM_INT, 'Timestamp de fin', VALUE_DEFAULT, 0)
+    public static function get_calendar_parameters() {
+        return new \external_function_parameters([
+            'studentemail' => new \external_value(PARAM_EMAIL, 'Email del estudiante'),
+            'apikey' => new \external_value(PARAM_RAW, 'API Key de autenticación'),
+            'timestart' => new \external_value(PARAM_INT, 'Timestamp de inicio', VALUE_DEFAULT, 0),
+            'timeend' => new \external_value(PARAM_INT, 'Timestamp de fin', VALUE_DEFAULT, 0)
         ]);
     }
 
-    public static function get_user_calendar($studentemail, $apikey, $timestart = 0, $timeend = 0) {
+    public static function get_calendar($studentemail, $apikey, $timestart = 0, $timeend = 0) {
         global $DB, $CFG, $USER;
 
-        self::validate_parameters(self::get_user_calendar_parameters(), [
+        self::validate_parameters(self::get_calendar_parameters(), [
             'studentemail' => $studentemail,
             'apikey' => $apikey,
             'timestart' => $timestart,
@@ -63,6 +68,11 @@ class local_appcrueservices_calendar_external extends external_api {
             'mnethostid' => $CFG->mnet_localhost_id
         ], '*', MUST_EXIST);
 
+        // Validar que el usuario está enrolado en algún curso
+        if (!enrol_get_users_courses($user->id, true)) {
+            throw new \moodle_exception('usernotenrolled', 'local_appcrueservices');
+        }
+        
         // Impersonar al estudiante.
         $originaluser = $USER;
         \core\session\manager::set_user($user);
@@ -121,20 +131,20 @@ class local_appcrueservices_calendar_external extends external_api {
         ];
     }
 
-    public static function get_user_calendar_returns() {
-        return new external_single_structure([
-            'events' => new external_multiple_structure(
-                new external_single_structure([
-                    'name' => new external_value(PARAM_TEXT, 'Nombre del evento'),
-                    'type' => new external_value(PARAM_TEXT, 'Tipo de evento'),
-                    'modulename' => new external_value(PARAM_TEXT, 'Tipo de módulo', VALUE_OPTIONAL),
-                    'timestart' => new external_value(PARAM_INT, 'Inicio (timestamp)'),
-                    'timesort' => new external_value(PARAM_INT, 'Duration (timestamp)'),
-                    'description' => new external_value(PARAM_RAW, 'Descripción del evento'),
-                    'fullname' => new external_value(PARAM_TEXT, 'Course name'),
-                    'location' => new external_value(PARAM_TEXT, 'Ubicación', VALUE_OPTIONAL),
-                    'url' => new external_value(PARAM_TEXT, 'URL del evento', VALUE_OPTIONAL),
-                    'nameauthor' => new external_value(PARAM_TEXT, 'Nombre del autor del evento', VALUE_OPTIONAL)
+    public static function get_calendar_returns() {
+        return new \external_single_structure([
+            'events' => new \external_multiple_structure(
+                new \external_single_structure([
+                    'name' => new \external_value(PARAM_TEXT, 'Nombre del evento'),
+                    'type' => new \external_value(PARAM_TEXT, 'Tipo de evento'),
+                    'modulename' => new \external_value(PARAM_TEXT, 'Tipo de módulo', VALUE_OPTIONAL),
+                    'timestart' => new \external_value(PARAM_INT, 'Inicio (timestamp)'),
+                    'timesort' => new \external_value(PARAM_INT, 'Duration (timestamp)'),
+                    'description' => new \external_value(PARAM_RAW, 'Descripción del evento'),
+                    'fullname' => new \external_value(PARAM_TEXT, 'Course name'),
+                    'location' => new \external_value(PARAM_TEXT, 'Ubicación', VALUE_OPTIONAL),
+                    'url' => new \external_value(PARAM_TEXT, 'URL del evento', VALUE_OPTIONAL),
+                    'nameauthor' => new \external_value(PARAM_TEXT, 'Nombre del autor del evento', VALUE_OPTIONAL)
                 ])
             )
         ]);

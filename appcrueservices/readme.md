@@ -4,30 +4,30 @@ Plugin local_webtoken
 
 Descripción
 -----------
-Este plugin para Moodle expone una funcionalidad:
+Este plugin para Moodle expone las siguientes funcionalidades:
 
 1. **Notas del alumno**  
-  Servicio web `local_appcrueservices_get_user_grades` que devuelve la lista completa de notas de un alumno en función de las restricciones que tenga aplicadas.
+  Servicio web `local_appcrueservices_get_grades` que devuelve la lista completa de notas de un alumno en función de las restricciones que tenga aplicadas.
 
 2. **Calendario del alumno**  
-  Servicio web `local_appcrueservices_get_user_calendar` que devuelve la lista completa de los eventos de calendario de un alumno en función de las restricciones que tenga aplicadas.
+  Servicio web `local_appcrueservices_get_calendar` que devuelve la lista completa de los eventos de calendario de un alumno en función de las restricciones que tenga aplicadas.
 
 3. **Foros del alumno**  
-   Servicio web `local_appcrueservices_get_user_forums` que devuelve los foros visibles en los cursos en los que está inscrito el estudiante, junto con las discusiones y mensajes publicados.
+   Servicio web `local_appcrueservices_get_forums` que devuelve los foros visibles en los cursos en los que está inscrito el estudiante, junto con las discusiones y mensajes publicados.
 
 Instalación
 -----------
-1. Copia la carpeta `appcrueservices/` a tu instalación de Moodle (dentro de `moodle/local/`).
-2. Accede a la sección `Administración del sitio > Notificaciones` para que Moodle instale y registre el plugin.
-3. Configura la API Key:
-  - Ve a `Administración del sitio > Plugins > Plugins locales > Appcrueservices`.
-  - Ingresa tu API Key en el campo correspondiente y guarda los cambios
+1. Copie la carpeta `appcrueservices/` a su instalación de Moodle (dentro de `moodle/local/`).
+2. Acceda a la sección `Administración del sitio > Notificaciones` para que Moodle instale y registre el plugin.
+3. Configure la API Key:
+  - Vaya a `Administración del sitio > Plugins > Plugins locales > Appcrueservices`.
+  - Ingrese su API Key en el campo correspondiente y guarde los cambios
 4. Configuración de servicios web:
-  - Ve a `Administración del sitio > Plugins > Servicios web > Servicios externos`.
-  - Verifica que existe el servicio con shortname `appcrueservices_service` (o el nombre que hayas definido).
-  - Asegúrate de que la función `local_appcrueservices_get_user_grades` esté habilitada.
+  - Vaya a `Administración del sitio > Plugins > Servicios web > Servicios externos`.
+  - Verifique que existe el servicio con shortname `appcrueservices_service` (o el nombre que haya definido).
+  - Asegúrese de que la función `local_appcrueservices_get_grades` esté habilitada.
 5. Permisos:
-  - Asigna la capability `local/appcrueservices:use` al rol `manager` (u otro rol) vía `Administración del sitio > Usuarios > Permisos > Definir roles`.
+  - Asigne la capability `local/appcrueservices:use` al rol `manager` (u otro rol) vía `Administración del sitio > Usuarios > Permisos > Definir roles`.
 
 Uso
 ---
@@ -207,8 +207,8 @@ Ejemplo con curl
 # 1. Obtener notas del alumno
 curl "https://TU_MOODLE_DOMAIN/local/appcrueservices/grades_proxy.php?studentemail=EMAIL_ESTUDIANTE&apikey=TU_API_KEY"
 
-# 2. Obtener calendario del alumno
+# 2. Obtener calendarios del alumno
 curl "https://TU_MOODLE_DOMAIN/http:/local/appcrueservices/calendar_proxy.php?moodlewsrestformat=json&studentemail=EMAIL_ESTUDIANTE&apikey=TU_API_KEY&timestart=1751788139&timeend=0"
 
-# 3. Revocar token de usuario
+# 3. Obtener forums del alumno
 curl "https:/TU_MOODLE_DOMAIN/local/appcrueservices/forums_proxy.php?moodlewsrestformat=json&studentemail=EMAIL_ESTUDIANTE&apikey=TU_API_KEY"

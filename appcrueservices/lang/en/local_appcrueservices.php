@@ -30,7 +30,7 @@ $string['servicename'] = 'Services AppCrue';
 
 // Config settings.
 $string['privacy:metadata'] = 'The AppCrue Services plugin does not store any personal data.';
-$string['local_appcrueservices:use'] = 'Allow the use of the AppCrue web service';
+$string['appcrueservices:use'] = 'Allow the use of the AppCrue web service';
 $string['desc'] = 'This plugin provides a secure API-based interface to retrieve student academic data, such as final grades and calendar events, using their email address. It is designed for external integrations that require controlled access to user information without direct authentication.';
 $string['wstoken'] = 'Web Service Token';
 $string['wstoken_desc'] = 'Access token for the web service that will be used internally by this plugin.';
@@ -41,8 +41,9 @@ $string['apikey_desc'] = 'Secret key for authentication with external services.'
 $string['invalidapikey'] = 'Invalid API Key';
 $string['missingwstoken'] = 'The web service token has not been configured.';
 $string['jsondecodeerror'] = 'Error interpreting JSON response from server: {$a}.';
+$string['usernotenrolled'] = 'The user is not enrolled in any course.';
 
 // Service function descriptions.
-$string['service:get_user_grades'] = 'Retrieve final course grades for a student by email.';
-$string['service:get_user_forums'] = 'Retrieve visible forums, discussions, and replies for an authenticated student.';
-$string['service:get_user_calendar'] = 'Retrieve calendar events for a student identified by email.';
+$string['service:get_grades'] = 'Retrieve final course grades for a student by email.';
+$string['service:get_forums'] = 'Retrieve visible forums, discussions, and replies for an authenticated student.';
+$string['service:get_calendar'] = 'Retrieve calendar events for a student identified by email.';

@@ -1,4 +1,11 @@
 <?php
+namespace local_appcrueservices\external;
+
+use core_text;
+use context_module;
+use moodle_url;
+use ReflectionFunction;
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -25,16 +32,17 @@
 
 defined('MOODLE_INTERNAL') || die();
 
+global $CFG;
 require_once($CFG->libdir . '/externallib.php');
 require_once($CFG->dirroot . '/mod/forum/lib.php');
 require_once($CFG->dirroot . '/mod/forum/locallib.php');
 
-class local_appcrueservices_forums_external extends external_api {
+class forums extends \external_api {
 
-    public static function get_user_forums_parameters() {
-        return new external_function_parameters([
-            'studentemail' => new external_value(PARAM_EMAIL, 'Email del estudiante'),
-            'apikey' => new external_value(PARAM_RAW, 'API Key de autenticación')
+    public static function get_forums_parameters() {
+        return new \external_function_parameters([
+            'studentemail' => new \external_value(PARAM_EMAIL, 'Email del estudiante'),
+            'apikey' => new \external_value(PARAM_RAW, 'API Key de autenticación')
         ]);
     }
     
@@ -52,10 +60,10 @@ class local_appcrueservices_forums_external extends external_api {
         return $tree;
     }
 
-    public static function get_user_forums($studentemail, $apikey) {
+    public static function get_forums($studentemail, $apikey) {
         global $DB, $CFG, $USER;
 
-        self::validate_parameters(self::get_user_forums_parameters(), [
+        self::validate_parameters(self::get_forums_parameters(), [
             'studentemail' => $studentemail,
             'apikey' => $apikey
         ]);
@@ -74,6 +82,12 @@ class local_appcrueservices_forums_external extends external_api {
             'mnethostid' => $CFG->mnet_localhost_id
         ], '*', MUST_EXIST);
 
+        // Validar que el usuario está enrolado en algún curso
+        if (!enrol_get_users_courses($user->id, true)) {
+            throw new \moodle_exception('usernotenrolled', 'local_appcrueservices');
+        }
+        
+        // Guardar usuario original.
         $originaluser = $USER;
 
         try {
@@ -93,7 +107,7 @@ class local_appcrueservices_forums_external extends external_api {
                     $discussions = forum_get_discussions($cm);
 
                     foreach ($discussions as $discussion) {
-                        $context = context_module::instance($cm->id);
+                        $context = \context_module::instance($cm->id);
 
                         // Compatibilidad con Moodle 3.7, 3.11, 4.0 y posteriores
                         if ((new ReflectionFunction('forum_get_all_discussion_posts'))->getNumberOfParameters() >= 3) {
@@ -116,7 +130,7 @@ class local_appcrueservices_forums_external extends external_api {
                         
                         $rootposts = self::build_post_tree($postmap);
 
-                        $discussionurl = new moodle_url('/mod/forum/discuss.php', ['d' => $discussion->id]);
+                        $discussionurl = new \moodle_url('/mod/forum/discuss.php', ['d' => $discussion->id]);
 
                         $forumoutput[] = [
                             'course_title' => (string) ($course->fullname ?? ''),
@@ -141,19 +155,19 @@ class local_appcrueservices_forums_external extends external_api {
         return $forumoutput;
     }
 
-    public static function get_user_forums_returns() {
-        return new external_multiple_structure(
-            new external_single_structure([
-                'course_title' => new external_value(PARAM_TEXT, 'Nombre del curso'),
-                'forum_name'   => new external_value(PARAM_TEXT, 'Nombre del foro'),
-                'description'  => new external_value(PARAM_RAW, 'Descripción del foro'),
-                'lock_at'      => new external_value(PARAM_TEXT, 'Fecha de bloqueo'),
-                'todo_date'    => new external_value(PARAM_TEXT, 'Fecha límite'),
-                'html_url'     => new external_value(PARAM_TEXT, 'URL del foro'),
-                'topic_title'  => new external_value(PARAM_TEXT, 'Título del tema de discusión'),
-                'posted_at'    => new external_value(PARAM_INT, 'Fecha de publicación del tema'),
-                'unread_count' => new external_value(PARAM_TEXT, 'Número de respuestas no leídas'),
-                'replies'      => new external_value(PARAM_RAW, 'Respuestas en JSON anidado')
+    public static function get_forums_returns() {
+        return new \external_multiple_structure(
+            new \external_single_structure([
+                'course_title' => new \external_value(PARAM_TEXT, 'Nombre del curso'),
+                'forum_name'   => new \external_value(PARAM_TEXT, 'Nombre del foro'),
+                'description'  => new \external_value(PARAM_RAW, 'Descripción del foro'),
+                'lock_at'      => new \external_value(PARAM_TEXT, 'Fecha de bloqueo'),
+                'todo_date'    => new \external_value(PARAM_TEXT, 'Fecha límite'),
+                'html_url'     => new \external_value(PARAM_TEXT, 'URL del foro'),
+                'topic_title'  => new \external_value(PARAM_TEXT, 'Título del tema de discusión'),
+                'posted_at'    => new \external_value(PARAM_INT, 'Fecha de publicación del tema'),
+                'unread_count' => new \external_value(PARAM_TEXT, 'Número de respuestas no leídas'),
+                'replies'      => new \external_value(PARAM_RAW, 'Respuestas en JSON anidado')
             ])
         );
     }

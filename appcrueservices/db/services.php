@@ -26,28 +26,25 @@
 defined('MOODLE_INTERNAL') || die();
 
 $functions = [
-    'local_appcrueservices_get_user_grades' => [
-        'classname'   => 'local_appcrueservices_grades_external',
-        'methodname'  => 'get_user_grades',
-        'classpath'   => 'local/appcrueservices/grades.php',
+    'local_appcrueservices_external_grades_get_grades' => [
+        'classname'   => 'local_appcrueservices\\external\\grades',
+        'methodname'  => 'get_grades',
         'description' => 'Devuelve las calificaciones finales de un estudiante autenticado por email, usando impersonación segura.',
         'type'        => 'read',
         'capabilities'=> 'local/appcrueservices:use',
         'ajax'        => false
     ],
-    'local_appcrueservices_get_user_calendar' => [
-        'classname'   => 'local_appcrueservices_calendar_external',
-        'methodname'  => 'get_user_calendar',
-        'classpath'   => 'local/appcrueservices/calendar.php',
+    'local_appcrueservices_external_calendar_get_calendar' => [
+        'classname'   => 'local_appcrueservices\\external\\calendar',
+        'methodname'  => 'get_calendar',
         'description' => 'Devuelve los eventos del calendario del estudiante.',
         'type'        => 'read',
         'capabilities'=> 'local/appcrueservices:use',
         'ajax'        => false
     ],
-    'local_appcrueservices_get_user_forums' => [
-        'classname'   => 'local_appcrueservices_forums_external',
-        'methodname'  => 'get_user_forums',
-        'classpath'   => 'local/appcrueservices/forums.php',
+    'local_appcrueservices_external_forums_get_forums' => [
+        'classname'   => 'local_appcrueservices\\external\\forums',
+        'methodname'  => 'get_forums',
         'description' => 'Obtiene los foros visibles para un estudiante',
         'type'        => 'read',
         'capabilities'=> 'local/appcrueservices:use',
@@ -58,9 +55,9 @@ $functions = [
 $services = [
     'Servicios AppCrue' => [
         'functions' => [
-            'local_appcrueservices_get_user_grades',
-            'local_appcrueservices_get_user_calendar',
-            'local_appcrueservices_get_user_forums'
+            'local_appcrueservices_external_grades_get_grades',
+            'local_appcrueservices_external_calendar_get_calendar',
+            'local_appcrueservices_external_forums_get_forums'
         ],
         'restrictedusers' => 0,
         'enabled' => 1,

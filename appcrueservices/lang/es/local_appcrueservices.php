@@ -30,7 +30,7 @@ $string['servicename'] = 'Services AppCrue';
 
 // Config settings.
 $string['privacy:metadata'] = 'El plugin Servicios AppCrue no almacena ningún dato personal.';
-$string['local_appcrueservices:use'] = 'Permitir el uso del servicio web AppCrue';
+$string['appcrueservices:use'] = 'Permitir el uso del servicio web AppCrue';
 $string['desc'] = 'Este plugin proporciona una interfaz segura basada en API para consultar datos académicos de estudiantes, como calificaciones finales y eventos de calendario, mediante su dirección de correo electrónico. Está diseñado para integraciones externas que requieren acceso controlado a información del usuario sin necesidad de autenticación directa.';
 $string['wstoken'] = 'Web Service Token';
 $string['wstoken_desc'] = 'Token de acceso al servicio web que se usará internamente por este plugin.';
@@ -41,8 +41,9 @@ $string['apikey_desc'] = 'Clave secreta utilizada para autenticar servicios exte
 $string['invalidapikey'] = 'API Key no válida';
 $string['missingwstoken'] = 'No se ha configurado el token del servicio web.';
 $string['jsondecodeerror'] = 'Error al interpretar la respuesta JSON del servidor: {$a}.';
+$string['usernotenrolled'] = 'El usuario no está matriculado en el curso.';
 
 // Descripciones de funciones del servicio.
-$string['service:get_user_grades'] = 'Obtener calificaciones del estudiante mediante suplantación segura.';
-$string['service:get_user_forums'] = 'Obtener los foros visibles, discusiones y respuestas para un estudiante autenticado.';
-$string['service:get_user_calendar'] = 'Recupera los eventos del calendario de un estudiante identificado por su email.';
+$string['service:get_grades'] = 'Obtener calificaciones del estudiante mediante suplantación segura.';
+$string['service:get_forums'] = 'Obtener los foros visibles, discusiones y respuestas para un estudiante autenticado.';
+$string['service:get_calendar'] = 'Recupera los eventos del calendario de un estudiante identificado por su email.';

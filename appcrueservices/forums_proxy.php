@@ -33,9 +33,9 @@ try {
     $studentemail = required_param('studentemail', PARAM_EMAIL);
     $apikey = required_param('apikey', PARAM_RAW);
 
-    // Validar API Key
-    $storedapikey = get_config('local_appcrueservices', 'apikey');
-    if ($storedapikey !== $apikey) {
+    // Obtener y validar API Key
+    $stored_apikey = get_config('local_appcrueservices', 'apikey');
+    if (empty($stored_apikey) || $apikey !== $stored_apikey) {
         throw new moodle_exception('invalidapikey', 'local_appcrueservices');
     }
 
@@ -45,7 +45,7 @@ try {
         throw new moodle_exception('missingwstoken', 'local_appcrueservices');
     }
 
-    $functionname = 'local_appcrueservices_get_user_forums';
+    $functionname = 'local_appcrueservices_external_forums_get_forums';
     $serverurl = $CFG->wwwroot . '/webservice/rest/server.php';
 
     $params = [

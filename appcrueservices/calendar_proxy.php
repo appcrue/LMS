@@ -35,9 +35,9 @@ try {
     $timestart    = optional_param('timestart', 0, PARAM_INT);
     $timeend      = optional_param('timeend', 0, PARAM_INT);
 
-    // Validar API Key.
-    $storedapikey = get_config('local_appcrueservices', 'apikey');
-    if ($storedapikey !== $apikey) {
+    // Obtener y validar API Key
+    $stored_apikey = get_config('local_appcrueservices', 'apikey');
+    if (empty($stored_apikey) || $apikey !== $stored_apikey) {
         throw new moodle_exception('invalidapikey', 'local_appcrueservices');
     }
 
@@ -48,7 +48,7 @@ try {
     }
 
     // Construir la URL del web service.
-    $functionname = 'local_appcrueservices_get_user_calendar';
+    $functionname = 'local_appcrueservices_external_calendar_get_calendar';
     $serverurl = $CFG->wwwroot . '/webservice/rest/server.php';
 
     $params = [
