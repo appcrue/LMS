@@ -67,10 +67,10 @@ class announcements_service extends appcrue_service {
                         'forumid' => $forum->id,
                         'forumname' => $forum->name,
                         'subject' => format_string($post->subject),
-                        'message' => format_text($post->message, $post->messageformat),
+                        'message' => html_entity_decode(strip_tags($post->message), ENT_QUOTES | ENT_HTML5, 'UTF-8'),
                         'author' => fullname($author),
                         'timecreated' => $post->created,
-                        'url' => new \moodle_url('/mod/forum/discuss.php', ['d' => $discussion->id]),
+                        'url' => (string) new \moodle_url('/mod/forum/discuss.php', ['d' => $discussion->id]),
                     ];
                 }
             }
