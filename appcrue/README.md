@@ -122,15 +122,18 @@ This local plugin provides the following services following the AppCRUE API:
   - studentemail: email of the student to get calendar events for.
   - timestart: start timestamp for the calendar events.
   - timeend: end timestamp for the calendar events.
-- appcrue_forums: provides forum posts for a user. It takes the params apikey, studentemail.
-  - apikey: API key for authentication.
-  - studentemail: email of the student to get forum posts for.
-- appcrue_files: provides files for a user. It takes the params apikey, studentemail.
-  - apikey: API key for authentication.
-  - studentemail: email of the student to get files for.
 - appcrue_grades: provides grades for a user. It takes the params apikey, studentemail.
   - apikey: API key for authentication.
   - studentemail: email of the student to get grades for.
+- appcrue_forums: provides forum posts for a user. It takes the params apikey, studentemail.
+  - apikey: API key for authentication.
+  - studentemail: email of the student to get forum posts for.
+- appcrue_announcements: provides announcements for a user. It takes the params apikey, studentemail.
+  - apikey: API key for authentication.
+  - studentemail: email of the student to get announcements for.
+- appcrue_files: provides files for a user. It takes the params apikey, studentemail.
+  - apikey: API key for authentication.
+  - studentemail: email of the student to get files for.
 
 ## Web Service ##
 

@@ -19,8 +19,8 @@
  *
  * @package local_appcrue
  * @category admin
- * @author  Juan Pablo de Castro
- * @copyright 2021 onwards juanpablo.decastro@uva.es
+ * @author  Juan Pablo de Castro, Alberto Otero Mato
+ * @copyright 2021 onwards juanpablo.decastro@uva.es, alberto.otero@altia.es
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['allow_continue'] = 'Permitir fallback continue';
@@ -68,14 +68,6 @@ $string['idp_user_json_path'] = 'Selector del identificador';
 $string['idp_user_json_path_help'] = 'Selector tipo jsonpath para identificar el valor para identificar al usuario.';
 $string['idpheader'] = 'Verificación de tokens';
 $string['idpheader_help'] = 'Configuración del servico de verificación de tokens AppCrue. Válido para instituciones que usan un IdP OAUth.';
-$string['lmsappcrue:calendar:enable_calendar'] = 'Activar el API de calendario LMS';
-$string['lmsappcrue:calendar:enable_calendar_help'] = 'El API de calendario LMS permite a las aplicaciones externas obtener eventos del calendario de Moodle para un usuario.';
-$string['lmsappcrue:enable_files'] = 'Activar el API de archivos LMS';
-$string['lmsappcrue:enable_files_help'] = 'El API de archivos LMS permite a las aplicaciones externas obtener archivos de Moodle para un usuario.';
-$string['lmsappcrue:enable_forums'] = 'Activar el API de foros LMS';
-$string['lmsappcrue:enable_forums_help'] = 'El API de foros LMS permite a las aplicaciones externas obtener información de los foros de Moodle para un usuario.';
-$string['lmsappcrue:enable_grades'] = 'Activar el API de calificaciones LMS';
-$string['lmsappcrue:enable_grades_help'] = 'El API de calificaciones LMS permite a las aplicaciones externas obtener calificaciones de Moodle para un usuario.';
 $string['match_user_by'] = 'Campo de coincidencia con el perfil del usuario';
 $string['match_user_by_help'] = 'El token de autorización devuelve una identificación que debe coincidir con un campo de usuario.';
 $string['notify:new_grade_message'] = '### Nota para {$a->subjectname}' . "\n" . 'Tu nota es {$a->gradealpha} ({$a->grade}).' . "\n" . '{$a->revdateformat}.' . "\n" . '{$a->comment}';
@@ -95,3 +87,31 @@ $string['privacy:metadata'] = 'El plugin "AppCrue connection services" no almace
 
 $string['sitemapheader'] = 'Servicio de mapa del sitio';
 $string['sitemapheader_help'] = 'Genera una estructura JSON de categorías y cursos.';
+
+$string['lmsappcrue:header'] = 'AppCRUE-LMS Widgets integración';
+$string['lmsappcrue:header_help'] = 'Configuración del servicio de integración de Widgets de AppCRUE-LMS';
+$string['lmsappcrue:calendar:enable_calendar'] = 'Activar el API de calendario LMS';
+$string['lmsappcrue:calendar:enable_calendar_help'] = 'El API de calendario LMS permite a las aplicaciones externas obtener eventos del calendario de Moodle para un usuario.';
+$string['lmsappcrue:grades'] = 'AppCRUE calificaciones';
+$string['lmsappcrue:grades_help'] = 'Exponer las calificaciones del usuario a AppCRUE.';
+$string['lmsappcrue:enable_grades'] = 'Activar el API de calificaciones LMS';
+$string['lmsappcrue:enable_grades_help'] = 'El API de calificaciones LMS permite a las aplicaciones externas obtener calificaciones de Moodle para un usuario.';
+$string['lmsappcrue:forums'] = 'AppCRUE foros';
+$string['lmsappcrue:forums_help'] = 'Exponer las conversaciones del foro de usuarios a AppCRUE.';
+$string['lmsappcrue:forums_timewindow'] = 'Ventana de tiempo para foros';
+$string['lmsappcrue:forums_timewindow_help'] = 'Ventana de tiempo para recuperar publicaciones del foro. Se utiliza para limitar el número de publicaciones que devuelve el servicio.';
+$string['lmsappcrue:enable_forums'] = 'Activar el API de foros LMS';
+$string['lmsappcrue:enable_forums_help'] = 'El API de foros LMS permite a las aplicaciones externas obtener información de los foros de Moodle para un usuario.';
+$string['lmsappcrue:invalidtimerange'] = 'Rango de tiempo no válido';
+$string['lmsappcrue:announcements'] = 'AppCRUE anuncios';
+$string['lmsappcrue:announcements_help'] = 'Exponer los anuncios de usuario a AppCRUE.';
+$string['lmsappcrue:enable_announcements'] = 'Activar el API de anuncios LMS';
+$string['lmsappcrue:enable_announcements_help'] = 'El API de anuncios LMS permite a las aplicaciones externas obtener anuncios de los foros de Moodle para un usuario.';
+$string['lmsappcrue:files'] = 'AppCRUE archivos';
+$string['lmsappcrue:files_help'] = 'Exponer los archivos de usuario a AppCRUE.';
+$string['lmsappcrue:enable_files'] = 'Activar el API de archivos LMS';
+$string['lmsappcrue:enable_files_help'] = 'El API de archivos LMS permite a las aplicaciones externas obtener archivos de Moodle para un usuario.';
+$string['lmsappcrue:assignments'] = 'AppCRUE asignaciones';
+$string['lmsappcrue:assignments_help'] = 'Exponer las asignaciones del usuario a AppCRUE. Este punto de acceso permite a AppCRUE recuperar las asignaciones del usuario, sus fechas de vencimiento y estado.';
+$string['lmsappcrue:enable_assignments'] = 'Activar el API de asignaciones LMS';
+$string['lmsappcrue:enable_assignments_help'] = 'El API de asignaciones LMS permite a las aplicaciones externas obtener asignaciones de Moodle para un usuario.';

@@ -57,7 +57,7 @@ $services = [
 
 ];
 $functions = [
-    'local_appcrue_send_instant_messages' => [         // Eeb service function name.
+    'local_appcrue_send_instant_messages' => [         // Web service function name
         // Class containing the external function OR namespaced class in classes/external/XXXX.php.
         'classname'   => 'local_appcrue_external',
         // External function name.

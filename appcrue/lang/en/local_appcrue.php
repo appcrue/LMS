@@ -19,8 +19,8 @@
  *
  * @package local_appcrue
  * @category admin
- * @author  Juan Pablo de Castro
- * @copyright 2021 onwards juanpablo.decastro@uva.es
+ * @author  Juan Pablo de Castro, Alberto Otero Mato
+ * @copyright 2021 onwards juanpablo.decastro@uva.es, alberto.otero@altia.es
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['allow_continue'] = 'Allow continue as guest';
@@ -77,36 +77,6 @@ $string['idp_user_json_path'] = 'Selector in the IDP response.';
 $string['idp_user_json_path_help'] = 'Selector like jsonpath to identify the value to identify the user.';
 $string['idpheader'] = 'Verification of tokens';
 $string['idpheader_help'] = 'AppCrue token verification service configuration. This functionality is for institutions that use an OAUth IdP.';
-$string['lmsappcrue:assignments'] = 'AppCRUE assignments';
-$string['lmsappcrue:assignments_help'] = 'Expose the user assignments to AppCRUE. This endpoint allows AppCRUE to retrieve the user assignments and their due dates and status.';
-$string['lmsappcrue:calendar:enable_calendar'] = 'Enable calendar endpoint';
-$string['lmsappcrue:calendar:enable_calendar_help'] = 'Enable calendar endpoint to share the user calendar with AppCRUE.';
-$string['lmsappcrue:enable_assignments'] = 'Enable assignments endpoint';
-$string['lmsappcrue:enable_assignments_help'] = 'Enable assignments endpoint to share the user assignments with AppCRUE.';
-$string['lmsappcrue:enable_files'] = 'Enable files endpoint';
-$string['lmsappcrue:enable_files_help'] = 'Enable files endpoint to notify files and share download links.';
-$string['lmsappcrue:enable_forums'] = 'Enable forums endpoint';
-$string['lmsappcrue:enable_forums_help'] = 'Enable forums endpoint to share the user forum conversations with AppCRUE.';
-$string['lmsappcrue:enable_grades'] = 'Enable grades endpoint';
-$string['lmsappcrue:enable_grades_help'] = 'Enable grades endpoint to share the user grades with AppCRUE.';
-$string['lmsappcrue:enable_notifications'] = 'Enable notifications endpoint';
-$string['lmsappcrue:enable_notifications_help'] = 'Enable notifications endpoint to share the user notifications with AppCRUE.';
-$string['lmsappcrue:files'] = 'AppCRUE files';
-$string['lmsappcrue:files_help'] = 'Expose the user files to AppCRUE.';
-$string['lmsappcrue:forums'] = 'AppCRUE forums';
-$string['lmsappcrue:forums_help'] = 'Expose the user forum conversations to AppCRUE.';
-$string['lmsappcrue:forums_timewindow'] = 'Time window for forums';
-$string['lmsappcrue:forums_timewindow_help'] = 'Time window for retrieving forum posts. It is used to limit the number of posts returned by the service.';
-$string['lmsappcrue:grades'] = 'AppCRUE grades';
-$string['lmsappcrue:grades_help'] = 'Expose the user grades to AppCRUE.';
-$string['lmsappcrue:header'] = 'AppCRUE-LMS Widgets integration';
-$string['lmsappcrue:header_help'] = 'AppCRUE-LMS Widgets integration service configuration';
-$string['lmsappcrue:internalerror'] = 'Internal error';
-$string['lmsappcrue:invalidtimerange'] = 'Invalid time range';
-$string['lmsappcrue:match_user_by'] = 'Field for matching user\'s profile';
-$string['lmsappcrue:match_user_by_help'] = 'The userid parameter in the request is used to match the user\'s profile. The value of this field is used to match the user\'s profile.';
-$string['lmsappcrue:notifications'] = 'AppCRUE notifications';
-$string['lmsappcrue:notifications_help'] = 'Expose the user notifications to AppCRUE.';
 $string['match_user_by'] = 'Field for matching user\'s profile';
 $string['match_user_by_help'] = 'The authorization token returns a identifcation that need to be matched to a user field.';
 $string['missingtoken'] = 'Missing token';
@@ -126,3 +96,34 @@ $string['privacy:metadata'] = 'The "AppCrue connection services" plugin does not
 
 $string['sitemapheader'] = 'Sitemap service';
 $string['sitemapheader_help'] = 'Generates a JSON structure of categories and courses with many options.';
+
+$string['lmsappcrue:internalerror'] = 'Internal error';
+$string['lmsappcrue:match_user_by'] = 'Field for matching user\'s profile';
+$string['lmsappcrue:match_user_by_help'] = 'The userid parameter in the request is used to match the user\'s profile. The value of this field is used to match the user\'s profile.';
+$string['lmsappcrue:header'] = 'AppCRUE-LMS Widgets integration';
+$string['lmsappcrue:header_help'] = 'AppCRUE-LMS Widgets integration service configuration';
+$string['lmsappcrue:calendar:enable_calendar'] = 'Enable calendar endpoint';
+$string['lmsappcrue:calendar:enable_calendar_help'] = 'Enable calendar endpoint to share the user calendar with AppCRUE.';
+$string['lmsappcrue:grades'] = 'AppCRUE grades';
+$string['lmsappcrue:grades_help'] = 'Expose the user grades to AppCRUE.';
+$string['lmsappcrue:enable_grades'] = 'Enable grades endpoint';
+$string['lmsappcrue:enable_grades_help'] = 'Enable grades endpoint to share the user grades with AppCRUE.';
+$string['lmsappcrue:forums'] = 'AppCRUE forums';
+$string['lmsappcrue:forums_help'] = 'Expose the user forum conversations to AppCRUE.';
+$string['lmsappcrue:forums_timewindow'] = 'Time window for forums';
+$string['lmsappcrue:forums_timewindow_help'] = 'Time window for retrieving forum posts. It is used to limit the number of posts returned by the service.';
+$string['lmsappcrue:enable_forums'] = 'Enable forums endpoint';
+$string['lmsappcrue:enable_forums_help'] = 'Enable forums endpoint to share the user forum conversations with AppCRUE.';
+$string['lmsappcrue:invalidtimerange'] = 'Invalid time range';
+$string['lmsappcrue:announcements'] = 'AppCRUE announcements';
+$string['lmsappcrue:announcements_help'] = 'Expose the user announcements to AppCRUE.';
+$string['lmsappcrue:enable_announcements'] = 'Enable announcements endpoint';
+$string['lmsappcrue:enable_announcements_help'] = 'Enable announcements endpoint to share the user announcements with AppCRUE.';
+$string['lmsappcrue:files'] = 'AppCRUE files';
+$string['lmsappcrue:files_help'] = 'Expose the user files to AppCRUE.';
+$string['lmsappcrue:enable_files'] = 'Enable files endpoint';
+$string['lmsappcrue:enable_files_help'] = 'Enable files endpoint to notify files and share download links.';
+$string['lmsappcrue:assignments'] = 'AppCRUE assignments';
+$string['lmsappcrue:assignments_help'] = 'Expose the user assignments to AppCRUE. This endpoint allows AppCRUE to retrieve the user assignments and their due dates and status.';
+$string['lmsappcrue:enable_assignments'] = 'Enable assignments endpoint';
+$string['lmsappcrue:enable_assignments_help'] = 'Enable assignments endpoint to share the user assignments with AppCRUE.';
